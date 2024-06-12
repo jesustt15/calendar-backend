@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { dbConnection } = require('./database/config');
 require('dotenv').config()
 
@@ -20,6 +21,10 @@ app.use(express.json());
 //Rutas
 app.use('/api/auth', require('./routes/auth')); //todo lo que exporte lo habilita esta ruta
 app.use('/api/events', require('./routes/events'))
+
+app.use( '*', ( req, res ) => {
+    res.sendFile( path.join( __dirname, 'public/index.html' ) );
+  } );
 
 
 
